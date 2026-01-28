@@ -245,7 +245,7 @@ interface Grade {
 
 ## Future Enhancements
 
-- Add database integration (MongoDB/PostgreSQL)
+- Add database integration (PostgreSQL)
 - Implement student deletion
 - Add grade update/delete functionality
 - Input validation and error handling
