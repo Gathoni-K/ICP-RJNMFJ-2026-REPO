@@ -1,10 +1,12 @@
 import express from "express";
+import type { Student } from '../models/types.js';
 import {
     addStudent,
     getAllStudents,
     getStudentsById,
     addStudentGrade,
     calculateAverage,
+    deleteStudent,
 } from "../controllers/studentController.js";
 
 const router = express.Router();
@@ -41,3 +43,31 @@ router.post('/:id/grades', (req,res)=> {
     const result = addStudentGrade(id, subject, score);
     res.json(result);
 })
+
+//route for calculating the student's average.
+router.get('/:id/average', (req, res) => {
+    const id = req.params.id;
+    //answers which student
+    const average = calculateAverage(id);
+    //calculates the average
+
+    if(average === null){
+        return res.status(404).json({ error : "Student not found or has no grades" });
+    }
+
+    res.json({average});
+    //sends back the number
+});
+
+//route for deleting student
+router.delete('/:id', (req,res) => {
+    const deleted = deleteStudent(req.params.id);
+
+    if(!deleted) {
+        return res.status(404).json({error: "Student not found" });
+    }
+
+    res.json({ message: "Student deleted successfully" });
+})
+
+export default router;

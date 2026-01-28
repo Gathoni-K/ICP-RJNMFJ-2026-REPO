@@ -74,3 +74,15 @@ export const calculateAverage = (id: string): number | null => {
 
     return average;
 }
+
+export const deleteStudent = (id: string) : boolean => {
+    const index = students.findIndex(student => student.id === id);
+
+    if(index === -1){
+        return false;
+    }
+
+    students.splice(index, 1);
+    return true;
+};
+
