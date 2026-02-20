@@ -2,9 +2,13 @@ import { supabase } from '../config/supabase.js';
 import type { Student, Grade } from '../models/types.js';
 
 export const addStudent = async (name: string): Promise<Student> => {
+    //define our return type as a promise resolving to a Student object
     const { data, error } = await supabase
+    //supabase always return an object with 2 fields: data or error, the former if the operation was successful.
         .from('students')
+        //tells supabase the table we are targeting
         .insert([{ name }])
+        //adds a new row
         .select()
         .single();
 

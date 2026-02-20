@@ -18,7 +18,6 @@ INSERT INTO students (name) VALUES
     ('Amanda Martinez');
 
 -- Store their IDs to use for grades
--- Note: We'll use subqueries to get the IDs since they're auto-generated
 
 -- Add grades for Alex Johnson (student 1)
 INSERT INTO grades (student_id, subject, score) 
