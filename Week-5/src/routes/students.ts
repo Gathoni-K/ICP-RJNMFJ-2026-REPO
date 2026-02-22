@@ -17,20 +17,22 @@ import { authMiddleware } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
+// protects all routes below it — one line instead of one per route
+router.use(authMiddleware);
+
 // Route for getting all students
 router.get('/', async (req, res) => {
-    router.use(authMiddleware);
     try {
         const students = await getAllStudents();
         res.json(students);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        const err = error as Error;
+        res.status(500).json({ error: err.message });
     }
 });
 
 // Route for getting one student by their ID
 router.get('/:id', async (req, res) => {
-    router.use(authMiddleware);
     const result = getStudentSchema.safeParse(req.params);
 
     if (!result.success) {
@@ -49,13 +51,13 @@ router.get('/:id', async (req, res) => {
 
         res.json(data);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        const err = error as Error;
+        res.status(500).json({ error: err.message });
     }
 });
 
 // Route for adding a student
 router.post('/', async (req, res) => {
-    router.use(authMiddleware);
     const result = addStudentSchema.safeParse(req.body);
 
     if (!result.success) {
@@ -69,13 +71,13 @@ router.post('/', async (req, res) => {
         const newStudent = await addStudent(result.data.name);
         res.status(201).json(newStudent);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        const err = error as Error;
+        res.status(500).json({ error: err.message });
     }
 });
 
 // Route for adding a grade to a specific student
 router.post('/:id/grades', async (req, res) => {
-    router.use(authMiddleware);
     const result = addGradeSchema.safeParse({
         ...req.params,
         ...req.body
@@ -98,13 +100,13 @@ router.post('/:id/grades', async (req, res) => {
 
         res.status(201).json(student);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        const err = error as Error;
+        res.status(500).json({ error: err.message });
     }
 });
 
 // Route for calculating the student's average
 router.get('/:id/average', async (req, res) => {
-    router.use(authMiddleware);
     const result = getStudentSchema.safeParse(req.params);
 
     if (!result.success) {
@@ -123,13 +125,13 @@ router.get('/:id/average', async (req, res) => {
 
         res.json({ average });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        const err = error as Error;
+        res.status(500).json({ error: err.message });
     }
 });
 
 // Route for deleting a student
 router.delete('/:id', async (req, res) => {
-    router.use(authMiddleware);
     const result = deleteStudentSchema.safeParse(req.params);
 
     if (!result.success) {
@@ -148,7 +150,8 @@ router.delete('/:id', async (req, res) => {
 
         res.json({ message: 'Student deleted successfully' });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        const err = error as Error;
+        res.status(500).json({ error: err.message });
     }
 });
 
