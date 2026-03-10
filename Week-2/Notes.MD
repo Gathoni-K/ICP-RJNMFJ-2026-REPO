@@ -12,25 +12,25 @@
 -It should look something like:
 
     {
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "NodeNext",
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "NodeNext",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noUncheckedIndexedAccess": true,
-    "sourceMap": true,
-    "declaration": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
-    }
+      "compilerOptions": {
+        "target": "ES2020",
+        "module": "NodeNext",
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "NodeNext",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noUncheckedIndexedAccess": true,
+        "sourceMap": true,
+        "declaration": true
+      },
+      "include": ["src/**/*"],
+      "exclude": ["node_modules", "dist"]
+        }
 
 3.In package.json, update the section under scripts to look like this:
 
